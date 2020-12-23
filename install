@@ -71,5 +71,5 @@ if [ "${HOME}/.nixpkgs/darwin-configuration.nix" ]; then
 fi
 
 export NIX_PATH=$HOME/.nix-defexpr/channels:$NIX_PATH
-
+source /etc/static/bashrc
 darwin-rebuild switch -I "darwin-config=$HOME/.config/nix/darwin/configuration.nix"
