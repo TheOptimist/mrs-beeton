@@ -58,3 +58,10 @@ if [[ $? -ne 0 ]]; then
   ./result/bin/darwin-installer
   rm -rf ./result
 fi
+
+# Checkout the repository so we can start to rebuild the machine
+# Yes, assume we're doing this from a blank machine for the moment
+CLONE_TARGET="${HOME}/.config"
+if [ ! -d $"{CLONE_TARGET}" ]; then
+  git clone https://github.com/TheOptimist/mrs-beeton.git $CLONE_TARGET
+fi
