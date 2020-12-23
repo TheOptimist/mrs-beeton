@@ -31,6 +31,8 @@ else
   echo "Nix is already installed. Update from within Nix instead."
 fi
 
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
 # Installation of nix-darwin
 # TODO: Make this unattended. Expect? Sudo?
 
@@ -44,8 +46,6 @@ if [[ $? -ne 0 ]]; then
   ./result/bin/darwin-installer
   rm -rf ./result
 fi
-
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
 # Checkout the repository so we can start to rebuild the machine
 # Yes, assume we're doing this from a blank machine for the moment
