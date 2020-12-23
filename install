@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Unattended installation of Command Line Tools
+# Found on apple.stackexchange.com at https://apple.stackexchange.com/questions/107307/how-can-i-install-the-command-line-tools-completely-from-the-command-line/195963#195963
+# Homebrew uses a similar technique https://github.com/Homebrew/install/blob/878b5a18b89ff73f2f221392ecaabd03c1e69c3f/install#L297
+
+xcode-select -p >&/dev/null
+if [[ $? -ne 0 ]]; then
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  CLT=$( softwareupdate -l |
+    grep "\*.*Command Line Tools" |
+    head -n 1 |
+    awk -F ":" '{print $2}' |
+    sed -e 's/^ *//' |
+    tr -d '\n' )
+  echo "Installing '${CLT}'"
+  softwareupdate -i "$CLT" --verbose
+  rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+else
+  echo "Command Line Tools are installed at $(xcode-select -p)"
+fi
