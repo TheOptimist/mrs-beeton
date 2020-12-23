@@ -19,3 +19,14 @@ if [[ $? -ne 0 ]]; then
 else
   echo "Command Line Tools are installed at $(xcode-select -p)"
 fi
+
+# Installation of nix
+# TODO: Make this unattended. Expect? Sudo?
+
+type nix >&/dev/null
+if [[ $? -ne 0 ]]; then
+  echo "Installing Nix"
+  sh <(curl -L https://nixos.org/nix/install) --daemon --darwin-use-unencrypted-nix-store-volume
+else
+  echo "Nix is already installed. Update from within Nix instead."
+fi
