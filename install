@@ -47,20 +47,6 @@ fi
 
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
-# Installation of nix-darwin
-# TODO: Make this unattended. Expect? Sudo?
-
-type darwin-rebuild >&/dev/null
-if [[ $? -ne 0 ]]; then
-  nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-
-  # nix-darwin will control nix.conf
-  sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup-before-nix-darwin
-
-  ./result/bin/darwin-installer
-  rm -rf ./result
-fi
-
 # Checkout the repository so we can start to rebuild the machine
 # Yes, assume we're doing this from a blank machine for the moment
 CLONE_TARGET="${HOME}/.config"
