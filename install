@@ -65,3 +65,24 @@ CLONE_TARGET="${HOME}/.config"
 if [ ! -d $"{CLONE_TARGET}" ]; then
   git clone https://github.com/TheOptimist/mrs-beeton.git $CLONE_TARGET
 fi
+
+for filename in shells bashrc zshrc; do
+  filepath="/etc/${filename}"
+  if [ -f $filepath ] && [ ! -L $filepath ]; then
+    echo "Moving ${filepath} to allow nix-darwin to manage"
+    sudo mv "$filepath" "${filepath}.backup-before-nix-darwin"
+  fi
+done
+
+# TODO: This doesn't seem to work at the moment. Work it out later.
+echo "$USER	ALL=(ALL:ALL)	NOPASSWD:	/run/current-system/sw/bin/darwin-rebuild" |
+  sudo tee /etc/sudoers.d/nix-darwin > /dev/null
+
+if [ "${HOME}/.nixpkgs/darwin-configuration.nix" ]; then
+  rm $HOME/.nixpkgs/darwin-configuration.nix
+fi
+
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+export NIX_PATH=$HOME/.nix-defexpr/channels:$NIX_PATH
+
+darwin-rebuild switch -I "darwin-config=$HOME/.config/nix/darwin/configuration.nix"
