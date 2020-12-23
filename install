@@ -45,6 +45,8 @@ if [[ $? -ne 0 ]]; then
   rm -rf ./result
 fi
 
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
 # Installation of nix-darwin
 # TODO: Make this unattended. Expect? Sudo?
 
@@ -82,7 +84,6 @@ if [ "${HOME}/.nixpkgs/darwin-configuration.nix" ]; then
   rm $HOME/.nixpkgs/darwin-configuration.nix
 fi
 
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 export NIX_PATH=$HOME/.nix-defexpr/channels:$NIX_PATH
 
 darwin-rebuild switch -I "darwin-config=$HOME/.config/nix/darwin/configuration.nix"
