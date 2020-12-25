@@ -11,4 +11,19 @@ Mrs Beeton will install Command Line Tools, Nix and Nix Darwin and then clone he
 Yolo!
 > /bin/bash -c "$(curl https://raw.githubusercontent.com/TheOptimist/mrs-beeton/main/install)"
 
+## Inspiration
 
+https://hugoreeves.com/posts/2019/nix-home
+https://github.com/HugoReeves/nix-home
+
+https://luca.cambiaghi.me/nix-package-manager
+https://github.com/lccambiaghi/nixpkgs
+
+https://lucperkins.dev/blog/home-manager
+https://github.com/lucperkins/nix-home-config
+
+https://github.com/kalbasit/shabka
+
+https://github.com/kclejeune/system
+
+https://github.com/malob/nixpkgs
